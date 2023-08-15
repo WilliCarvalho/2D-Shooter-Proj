@@ -10,10 +10,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float velocity = 10;
     [SerializeField] private int lives = 3;
 
+    private Animator animator;
     private Transform playerTransform;
+    private bool isMoving;
+    private bool isHurt;
 
     private void Awake()
     {
+        #region Singleton
         if (instance == null)
         {
             instance = this;
@@ -22,22 +26,71 @@ public class Player : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        #endregion
+        animator = GetComponent<Animator>();
         playerTransform = GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        MoveHandler();
+        LifeHandler();
+        AnimationHandler();
+    }
+
+#region Handlers
+    private void MoveHandler()
+    {
         float moveX = Input.GetAxisRaw("Horizontal") * velocity * Time.deltaTime;
         float moveY = Input.GetAxisRaw("Vertical") * velocity * Time.deltaTime;
         transform.Translate(moveX, moveY, 0);
-        print(lives);
+        isMoving = moveX != 0 || moveY != 0;
+        // if(moveX != 0 || moveY != 0)
+        // {
+        //     isMoving = true;
+        // }
+        // else
+        // {
+        //     isMoving = false;
+        // }
+    }
+    
+    private void LifeHandler()
+    {
         if(lives <= 0)
         {
             Destroy(gameObject);
         }
     }
 
+    private void AnimationHandler()
+    {
+        bool isMovingAnimation = animator.GetBool("isMoving");
+        bool isHurtAnimation = animator.GetBool("isHurt");
+
+        if (isMoving && isMovingAnimation == false)
+        {
+            animator.SetBool("isMoving", true);
+        }
+        else if (!isMoving && isMovingAnimation == true)
+        {
+            animator.SetBool("isMoving", false);
+        }
+
+        if (isHurt && isHurtAnimation == false) 
+        {
+            animator.SetBool("isHurt", true);
+            isHurt = false;
+        }
+        else if (!isHurt && isHurtAnimation == true) 
+        {
+            animator.SetBool("isHurt", false);
+        }
+        //teste
+    }
+#endregion
+    
     public Vector3 GetPlayerPosition()
     {
         return playerTransform.position;
@@ -45,6 +98,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        isHurt = true;
         lives--;
     }
 }
