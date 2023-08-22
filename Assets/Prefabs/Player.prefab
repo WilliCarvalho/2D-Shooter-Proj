@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 3772358171511102520}
   - component: {fileID: 716206619076741242}
   - component: {fileID: 5470390334932092988}
-  - component: {fileID: 4777980302586760380}
   - component: {fileID: 4463762610831312125}
+  - component: {fileID: 1456351452930944660}
+  - component: {fileID: 3524331391128379150}
+  - component: {fileID: 8865399907370718055}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -160,20 +162,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4777980302586760380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1149438623044209913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47db004122fbabf4eb283091884ec716, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: 10
-  lives: 3
 --- !u!95 &4463762610831312125
 Animator:
   serializedVersion: 5
@@ -195,3 +183,41 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1456351452930944660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149438623044209913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e1c318afb5f0c42a9cd19bb38a3ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: 10
+--- !u!114 &3524331391128379150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149438623044209913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b3c6267410b2549a50989ed4662413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8865399907370718055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149438623044209913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f310d673cf2bbe45bfbe2b1d41a0a23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lives: 3
