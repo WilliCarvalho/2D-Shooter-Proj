@@ -21,5 +21,18 @@ public class MovePlayer : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical") * velocity * Time.deltaTime;
         transform.Translate(new Vector2(moveX, moveY).normalized * velocity * Time.deltaTime);
         PlayerInfo.instance.isMoving = moveX != 0 || moveY != 0;
+        FlipSprite(moveX);
+    }
+
+    private void FlipSprite(float moveX)
+    {
+        if (moveX < 0)
+        {
+            PlayerInfo.instance.GetSpriteRenderer().flipX = true;
+        }
+        else if (moveX > 0)
+        {
+            PlayerInfo.instance.GetSpriteRenderer().flipX = false;
+        }
     }
 }

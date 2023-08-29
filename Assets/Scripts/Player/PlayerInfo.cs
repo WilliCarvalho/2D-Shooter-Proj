@@ -11,7 +11,7 @@ public class PlayerInfo : MonoBehaviour
 {
     public static PlayerInfo instance;
 
-    [SerializeField] private int lives = 3;
+    [SerializeField] private int lifes = 3;
     [SerializeField] private float playerVelocity = 10;
 
     private SpriteRenderer spriteRenderer;
@@ -33,18 +33,23 @@ public class PlayerInfo : MonoBehaviour
         #endregion
         playerTransform = GetComponent<Transform>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        GameManager.instance.SetPlayerLife(lifes);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        LifeHandler();
+        if (collision.collider.tag == "Enemy")
+        {
+            LifeHandler();
+        }
     }
 
     private void LifeHandler()
     {
         isHurt = true;
-        lives--;
-        if(lives <= 0)
+        lifes--;
+        GameManager.instance.SetPlayerLife(lifes);
+        if (lifes <= 0)
         {
             Destroy(this.gameObject);
         }
@@ -66,4 +71,9 @@ public class PlayerInfo : MonoBehaviour
     }
 
     public bool CheckPlayerHurt() => isHurt;
+
+    public SpriteRenderer GetSpriteRenderer()
+    {
+        return spriteRenderer;
+    }
 }

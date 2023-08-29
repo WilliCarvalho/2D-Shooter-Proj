@@ -21,4 +21,13 @@ public class Enemy : MonoBehaviour
         enemyTransform.position = Vector3.MoveTowards(enemyTransform.position,
             targetPosition, velocity * Time.deltaTime);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Bullet")
+        {
+            GameManager.instance.SetGameScore(1);
+            Destroy(this.gameObject);
+        }
+    }
 }
