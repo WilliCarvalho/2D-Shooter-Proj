@@ -19,6 +19,10 @@ public class PlayerInfo : MonoBehaviour
     private bool isHurt;
     public bool isMoving;
 
+    private int playerLevel;
+    private int currentPlayerXP = 0;
+    private int toLevelUpXp = 10;
+
     private void Awake()
     {
         #region Singleton        
@@ -33,6 +37,10 @@ public class PlayerInfo : MonoBehaviour
         #endregion
         playerTransform = GetComponent<Transform>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
         GameManager.instance.SetPlayerLife(lifes);
     }
 
@@ -72,8 +80,36 @@ public class PlayerInfo : MonoBehaviour
 
     public bool CheckPlayerHurt() => isHurt;
 
+    public void SetPlayerHurt(bool value)
+    {
+        isHurt = value;
+    }
+
     public SpriteRenderer GetSpriteRenderer()
     {
         return spriteRenderer;
+    }
+
+    public int GetPlayerLevel()
+    {
+        return playerLevel;
+    }
+
+    public void SetCurrentXP(int xpToAdd)
+    {
+        currentPlayerXP += xpToAdd;
+        print(currentPlayerXP);
+        CheckLevelUp();
+    }
+
+    private void CheckLevelUp()
+    {
+        if (currentPlayerXP >= toLevelUpXp)
+        {
+            playerLevel++;
+            currentPlayerXP -= toLevelUpXp;
+            toLevelUpXp += 5;            
+        }
+        GameManager.instance.SetNewXPInfo(playerLevel, currentPlayerXP, toLevelUpXp);
     }
 }

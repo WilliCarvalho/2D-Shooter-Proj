@@ -17,6 +17,11 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector3.right * bulletVelocity * Time.deltaTime);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(this.gameObject);
+    }
+
     private IEnumerator LifeSpan()
     {
         yield return new WaitForSeconds(bulletLifeTime);

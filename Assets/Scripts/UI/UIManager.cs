@@ -7,17 +7,19 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance;
+    public static UIManager instance;
 
     [SerializeField] private TextMeshProUGUI lifesText;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI xPInfoText;
+    [SerializeField] private TextMeshProUGUI currentLevelXPText;
 
     private void Awake()
     {
         #region Singleton
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
         }
         else
         {
@@ -42,5 +44,15 @@ public class UIManager : MonoBehaviour
     public void SetLifesText(int updatedLife)
     {
         lifesText.text = "Lifes: " + updatedLife;
+    }
+
+    public void SetXPInfoText(int currentXP, int toLevelUpXP)
+    {
+        xPInfoText.text = currentXP + " / " + toLevelUpXP;
+    }
+
+    public void SetPlayerLevelText(int newLevel)
+    {
+        currentLevelXPText.text = "Level: " + newLevel.ToString();
     }
 }

@@ -37,12 +37,13 @@ public class AnimatePlayer : MonoBehaviour
         if (isHurt && isHurtAnimation == false)
         {
             animator.SetBool("isHurt", true);
-            isHurt = false;
         }
-        else if (!isHurt && isHurtAnimation == true)
+        else if (isHurtAnimation == true)
         {
+            PlayerInfo.instance.SetPlayerHurt(false);
             animator.SetBool("isHurt", false);
         }
-        //teste
+        print("Isplayer hurt: " + isHurt);
+        print(isHurtAnimation);
     }
 }

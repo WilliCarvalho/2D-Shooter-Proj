@@ -38,12 +38,19 @@ public class GameManager : MonoBehaviour
     public void SetGameScore(int score)
     {
         gameScore += score;
-        UIManager.Instance.SetScoreText(gameScore);
+        PlayerInfo.instance.SetCurrentXP(score);
+        UIManager.instance.SetScoreText(gameScore);
     }
 
     public void SetPlayerLife(int life)
     {
         playerLifes = life;
-        UIManager.Instance.SetLifesText(playerLifes);
+        UIManager.instance.SetLifesText(playerLifes);
+    }
+
+    public void SetNewXPInfo(int currentlevel, int currentXP, int toLevelUpXP)
+    {
+        UIManager.instance.SetXPInfoText(currentXP, toLevelUpXP);
+        UIManager.instance.SetPlayerLevelText(currentlevel);
     }
 }
