@@ -48,19 +48,42 @@ public class PlayerInfo : MonoBehaviour
     {
         if (collision.collider.tag == "Enemy")
         {
-            LifeHandler();
+            LifeHandler(-1);
         }
     }
 
-    private void LifeHandler()
+    public void LifeHandler(int value)
     {
-        isHurt = true;
-        lifes--;
-        GameManager.instance.SetPlayerLife(lifes);
-        if (lifes <= 0)
+        if (value > 0)
         {
-            Destroy(this.gameObject);
+            lifes += value;
         }
+        else
+        {
+            isHurt = true;
+            lifes += value;
+            if (lifes <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        GameManager.instance.SetPlayerLife(lifes);
+    }
+    private void CheckLevelUp()
+    {
+        if (currentPlayerXP >= toLevelUpXp)
+        {
+            playerLevel++;
+            currentPlayerXP -= toLevelUpXp;
+            toLevelUpXp += 5;
+            GameManager.instance.OnLevelUp();
+        }
+        GameManager.instance.SetLevelInfo(playerLevel, currentPlayerXP, toLevelUpXp);
+    }
+
+    public bool CheckPlayerVelocity()
+    {
+        return isMoving;
     }
 
     public Vector2 GetPlayerPosition()
@@ -71,11 +94,6 @@ public class PlayerInfo : MonoBehaviour
     public float GetPlayerVelocity()
     {
         return playerVelocity;
-    }
-
-    public bool CheckPlayerVelocity()
-    {
-        return isMoving;
     }
 
     public bool CheckPlayerHurt() => isHurt;
@@ -102,14 +120,4 @@ public class PlayerInfo : MonoBehaviour
         CheckLevelUp();
     }
 
-    private void CheckLevelUp()
-    {
-        if (currentPlayerXP >= toLevelUpXp)
-        {
-            playerLevel++;
-            currentPlayerXP -= toLevelUpXp;
-            toLevelUpXp += 5;            
-        }
-        GameManager.instance.SetNewXPInfo(playerLevel, currentPlayerXP, toLevelUpXp);
-    }
 }

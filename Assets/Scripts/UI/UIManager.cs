@@ -9,6 +9,10 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
+    [Header("Containers")]
+    [SerializeField] private Transform poweUpContainer;
+
+    [Header ("Top-View-Texts")]
     [SerializeField] private TextMeshProUGUI lifesText;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI xPInfoText;
@@ -34,6 +38,13 @@ public class UIManager : MonoBehaviour
     {
         lifesText.gameObject.SetActive(true);
         scoreText.gameObject.SetActive(true);
+
+        SetPowerUpContainer(false);
+    }
+
+    public void SetPowerUpContainer(bool isActive)
+    {
+        poweUpContainer.gameObject.SetActive(isActive);
     }
 
     public void SetScoreText(int updatedScore)
